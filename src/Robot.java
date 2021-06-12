@@ -1,4 +1,10 @@
-public class Robot implements Jumpable,Runnable{
+/*
+1. Создайте три класса Человек, Кот, Робот, которые не наследуются от одного класса. Эти
+классы должны уметь бегать и прыгать (методы просто выводят информацию о действии в
+консоль).
+ */
+
+public class Robot implements Sportsman {
     private int maxRunDistance;
     private int maxJumpHeight;
 
@@ -7,21 +13,13 @@ public class Robot implements Jumpable,Runnable{
         this.maxJumpHeight = maxJumpHeight;
     }
 
-    @Override
-    public void jump(Wall wall) {
-        if (wall.tryingJump(maxJumpHeight)) {
-            System.out.println("Robot jumped over the wall");
-        } else {
-            System.out.println(("Robot not jumped over the wall"));
-        }
+    public int jump() {
+        System.out.println("Robot jump");
+        return this.maxJumpHeight;
     }
 
-    @Override
-        public void run(RunningTrack runningTrack) {
-            if (runningTrack.tryingRun(maxRunDistance)) {
-                System.out.println("Robot ran successfully");
-            } else {
-                System.out.println(("Robot couldn't run"));
-            }
-        }
+    public int run() {
+        System.out.println("Robot run");
+        return this.maxRunDistance;
     }
+}
