@@ -8,15 +8,15 @@
  */
 
 public class RunningTrack implements Obstacle {
-    private int TrackLength;
+    private int trackLength;
 
     public RunningTrack(int length) {
-        this.TrackLength = length;
+        this.trackLength = length;
     }
 
     @Override
     public boolean overcome(Sportsman sportsman) {
-        if(sportsman.run()>=this.TrackLength) {
+        if(sportsman.run()>=this.trackLength) {
             System.out.printf("%s ran the entire distance!\n", sportsman.getClass().getName());
             return true;
         }else{
