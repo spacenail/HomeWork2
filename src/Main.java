@@ -9,8 +9,8 @@
 public class Main {
     public static void main(String[] args) {
         Sportsman[] sportsmenArray = {
-                new Human(100, 2),
-                new Robot(500, 3),
+                new Human(100, 1),
+                new Robot(500, 1),
                 new Cat(20, 1)
         };
 
@@ -22,7 +22,7 @@ public class Main {
         for (int i = 0; i < sportsmenArray.length; i++) {
             for (int j = 0; j < obstaclesArray.length; j++) {
                 if (!obstaclesArray[j].overcome(sportsmenArray[i])) {
-                    System.out.println(sportsmenArray[i].getClass().getName() + " eliminated from tournament");
+                    System.out.println(sportsmenArray[i] + " eliminated from tournament");
                     break;
                 }
             }

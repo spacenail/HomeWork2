@@ -22,4 +22,9 @@ public class Cat implements Sportsman {
         System.out.println("Cat run");
         return this.maxRunDistance;
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName();
+    }
 }

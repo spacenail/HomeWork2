@@ -22,4 +22,9 @@ public class Robot implements Sportsman {
         System.out.println("Robot run");
         return this.maxRunDistance;
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName();
+    }
 }

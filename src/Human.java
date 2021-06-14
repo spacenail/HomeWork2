@@ -24,4 +24,9 @@ public class Human implements Sportsman{
         System.out.println("Human run");
         return this.maxRunDistance;
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName();
+    }
 }
