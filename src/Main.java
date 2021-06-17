@@ -39,12 +39,13 @@ add() можно добавлять записи. С помощью метода
  */
 
         PhoneBook phoneBook = new PhoneBook();
-        phoneBook.add("Иванов", "84951001122");
-        phoneBook.add("Петров", "84952221122");
-        phoneBook.add("Сидоров", "84953001122");
-        phoneBook.add("Иванов", "84991001122");
-        System.out.println(phoneBook.get("Костров"));
-        System.out.println(phoneBook.get("Иванов"));
-        System.out.println(phoneBook.get("Петров"));
+        phoneBook.set("Иванов", "84951001122");
+        phoneBook.set("Петров", "84952221122");
+        phoneBook.set("Сидоров", "84953001122");
+        phoneBook.set("Иванов", "84991001122");
+
+        phoneBook.get("Костров");
+        phoneBook.get("Иванов");
+        phoneBook.get("Петров");
     }
 }
