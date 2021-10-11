@@ -1,19 +1,19 @@
 public class Team {
     private String teamName;
-    private Sportsman[] participants = new Sportsman[4];
+    private Sportsman[] sportsman;
 
-    public Team(String teamName,  Sportsman sportsman1,Sportsman sportsman2,Sportsman sportsman3,Sportsman sportsman4) {
+    public Team(String teamName, Sportsman[] sportsman) {
         this.teamName = teamName;
-        participants[0] = sportsman1;
-        participants[1] = sportsman2;
-        participants[2] = sportsman3;
-        participants[3] = sportsman4;
+        this.sportsman = sportsman;
     }
 
     public void getTeamInfo(){
         System.out.println(teamName);
-        for(Sportsman s:participants){
+        for(Sportsman s:sportsman){
             System.out.println(s);
         }
+    }
+
+    public void showResults(){
     }
 }
