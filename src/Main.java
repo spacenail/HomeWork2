@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
 /*
@@ -18,13 +20,20 @@ public class Main {
                 new Wall(2),
                 new Treadmill(50)};
 
+        boolean flag;
+
         for (Sportsman sportsman:dreamTeam){
+            flag = true;
             for(Obstacles obstacles:trainingTrack){
                 if (!obstacles.overcome(sportsman)) {
+                    System.out.println(sportsman + " покидает полосу препятствия...");
+                    flag = false;
                     break;
                 }
             }
+            if (flag){
+                System.out.println(sportsman + " прошел полосу препятствия!");
+            }
         }
-
     }
 }

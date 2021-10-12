@@ -25,7 +25,7 @@ public class Treadmill implements Obstacles {
     @Override
     public String toString() {
         return "Treadmill{" +
-                "length=" + length +
+                "дистанция=" + length +
                 '}';
     }
 }

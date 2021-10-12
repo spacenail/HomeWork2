@@ -25,7 +25,7 @@ public class Wall implements Obstacles {
     @Override
     public String toString() {
         return "Wall{" +
-                "height=" + height +
+                "высота=" + height +
                 '}';
     }
 }

@@ -14,21 +14,21 @@ public class Robot implements Sportsman {
 
     @Override
     public int run() {
-        System.out.println(this.getClass().getName() + " run");
+        System.out.println(this.getClass().getName() + " начинает бег");
         return maxDistance;
     }
 
     @Override
     public int jump() {
-        System.out.println(this.getClass().getName() + " jump");
+        System.out.println(this.getClass().getName() + " совершает прыжок");
         return maxHeight;
     }
 
     @Override
     public String toString() {
         return "Robot{" +
-                "maxHeight=" + maxHeight +
-                ", maxDistance=" + maxDistance +
+                "высота прыжка=" + maxHeight +
+                ", макс.дистанция=" + maxDistance +
                 '}';
     }
 }
