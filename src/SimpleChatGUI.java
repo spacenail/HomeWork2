@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SimpleChatGUI {
     private final JFrame window;
@@ -11,7 +13,6 @@ public class SimpleChatGUI {
         window.setBounds(300, 300, 400, 400);
         window.setMinimumSize(window.getSize());
 
-
         JTextArea outputArea = new JTextArea();
         outputArea.setEditable(false);
         window.add(outputArea, BorderLayout.CENTER);
@@ -19,9 +20,23 @@ public class SimpleChatGUI {
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BorderLayout());
         JTextField inputArea = new JTextField();
+        inputArea.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                outputArea.append(inputArea.getText() + "\n");
+                inputArea.setText("");
+            }
+        });
         southPanel.add(inputArea, BorderLayout.CENTER);
 
         JButton sendButton = new JButton("Send");
+        sendButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                outputArea.append(inputArea.getText() + "\n");
+                inputArea.setText("");
+            }
+        });
         southPanel.add(sendButton, BorderLayout.EAST);
         window.add(southPanel, BorderLayout.SOUTH);
 
