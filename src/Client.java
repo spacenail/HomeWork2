@@ -45,12 +45,17 @@ public class Client {
 
 
     private void readMessage() {
-        while (true) {
-            try {
-                System.out.printf("Message from Server: %s \n", dataInputStream.readUTF());
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            while (true){
+                String inputMessage = dataInputStream.readUTF();
+                if(inputMessage.equals("exit")){
+                    break;
+                } else {
+                    System.out.printf("Message from Server: %s \n", inputMessage);
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

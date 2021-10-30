@@ -19,7 +19,7 @@ public class Server {
             System.out.println("...Done!");
             System.out.println("Waiting connection...");
             Socket accepted = serverSocket.accept();
-            System.out.println("Connection is established");
+            System.out.println("Connection established");
 
             dataInputStream = new DataInputStream(accepted.getInputStream());
             dataOutputStream = new DataOutputStream(accepted.getOutputStream());
@@ -56,15 +56,17 @@ public class Server {
     }
 
     private void readMessage() {
+        try {
         while (true){
-            String inputMessage = null;
-            try {
-                inputMessage = dataInputStream.readUTF();
-            } catch (IOException e) {
-                e.printStackTrace();
+            String inputMessage = dataInputStream.readUTF();
+            if(inputMessage.equals("exit")){
+                break;
+            } else {
+                System.out.printf("Message from Client: %s \n", inputMessage);
             }
-            System.out.printf("Message from Client: %s \n",inputMessage);
+        }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
-
 }
