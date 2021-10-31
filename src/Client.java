@@ -2,7 +2,6 @@ import java.io.*;
 import java.net.Socket;
 
 public class Client {
-    private Socket socket;
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
 
@@ -12,10 +11,11 @@ public class Client {
 
     private void connect(String host, int port) {
         try {
-            socket = new Socket(host, port);
+            Socket socket = new Socket(host, port);
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
             System.out.println("Connection established");
+
             new Thread(() -> readMessage())
                     .start();
 
@@ -42,7 +42,6 @@ public class Client {
             e.printStackTrace();
         }
     }
-
 
     private void readMessage() {
         try {

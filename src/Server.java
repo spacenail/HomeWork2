@@ -3,16 +3,14 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
-    private int port;
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
 
     public Server(int port) {
-        this.port = port;
-        startServer();
+        startServer(port);
     }
 
-    private void startServer(){
+    private void startServer(int port){
         try {
             System.out.println("Starting server...");
             ServerSocket serverSocket = new ServerSocket(port);
@@ -24,14 +22,10 @@ public class Server {
             dataInputStream = new DataInputStream(accepted.getInputStream());
             dataOutputStream = new DataOutputStream(accepted.getOutputStream());
 
-            new Thread(() -> {
-                readMessage();
-            })
+            new Thread(() -> readMessage())
                     .start();
 
-            new Thread(() -> {
-                writeMessage();
-            })
+            new Thread(() -> writeMessage())
                     .start();
 
         } catch (IOException e) {
