@@ -39,6 +39,7 @@ public class Server {
             while (true) {
                 String str = reader.readLine();
                 dataOutputStream.writeUTF(str);
+                System.out.println(str);
 
                 if (str.equals("exit")) {
                     break;

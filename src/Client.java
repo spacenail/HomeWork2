@@ -33,6 +33,7 @@ public class Client {
         while (true) {
             String str = reader.readLine();
             dataOutputStream.writeUTF(str);
+            System.out.println(str);
 
             if (str.equals("exit")) {
                 break;
