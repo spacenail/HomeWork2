@@ -73,7 +73,6 @@ public class ClientHandler {
                                 },
                                 () -> sendMessage("Bad credentials.")
                         );
-
                 if (isSuccess.get()) break;
             }
         }
@@ -94,11 +93,10 @@ public class ClientHandler {
     public void readMessage() {
         try {
             String inboundMessage = in.readUTF();
-            // формат персонального сообщения /w user2 здарова друг!
+            //valid request sample: /w user2 здарова друг!
             if (inboundMessage.startsWith("/w")) {
                 String[] splitInboundMessage = inboundMessage.split("\\s",3);
-
-                if(!server.personalMessage(splitInboundMessage[1],splitInboundMessage[2])){
+                if(!server.personalMessage(splitInboundMessage[1],this.getName(),splitInboundMessage[2])){
                     out.writeUTF("Указанный пользователь не найден");
                 }
             } else {
@@ -111,7 +109,7 @@ public class ClientHandler {
 
     public void listenMessages() {
         while (true) {
-            readMessage();
+                readMessage();
         }
     }
 }

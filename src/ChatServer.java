@@ -14,9 +14,9 @@ import java.util.Set;
             try {
                 authenticationService = new AuthenticationService();
                 loggedClients = new HashSet<>();
-                this.socket = new ServerSocket(8888); //запуск сервера на порту 8888. Singleton?
+                this.socket = new ServerSocket(8888); //запуск сервера на порту 8888. Singleton нужен?
 
-                while (true) { // бесконечное ожидание новых клиентов
+                while (true) { // бесконечное ожидание и присоединение новых клиентов
                     System.out.println("Waiting for a new connection...");
                     Socket client = socket.accept();
                     System.out.println("Client accepted.");
@@ -45,15 +45,8 @@ import java.util.Set;
             loggedClients.remove(client);
         }
 
-         //проверка на совпадение переданного имени пользователя с уже залогиннеными
+        //проверка на совпадение переданного имени пользователя с уже залогиннеными
         public boolean isUsernameOccupied(String username) {
-//        for (String loggedUsername : loggedUsernames) {
-//            if (loggedUsernames.equals(username)) {
-//                return true;
-//            }
-//        }
-//        return false;
-
             return loggedClients.stream()
                     .anyMatch(c -> c.getName().equals(username));
         }
@@ -63,25 +56,15 @@ import java.util.Set;
         }
 
         // если переданный пользователь залогинен отправялем ему переданное сообщение.
-        public boolean personalMessage(String recipient, String message){
-            if(isUsernameOccupied(recipient)){
-
+        public boolean personalMessage(String recipient,String sender, String message) {
+            if (isUsernameOccupied(recipient)) {
+                StringBuffer sb = new StringBuffer("[").append(sender).append("]: ").append(message);
                 loggedClients.stream()
-                        .filter(client -> client.equals(recipient))
-                        .forEach(client -> client.sendMessage(message));
-
-                /*
-                for(ClientHandler c:loggedClients){
-                    if(c.getName().equals(recipient)){
-                        c.sendMessage(message);
-                    }
-                }
-                 */
-            return true;
-            }else {
+                        .filter(client -> client.getName().equals(recipient))
+                        .forEach(client -> client.sendMessage(sb.toString()));
+                return true;
+            } else {
                 return false;
             }
         }
-
-
     }
