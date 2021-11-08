@@ -3,6 +3,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ClientHandler {
@@ -19,12 +20,23 @@ public class ClientHandler {
         try {
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
+
         } catch (IOException ex) {
-            throw new RuntimeException("Something went wring during a client connection establishing.");
+            throw new RuntimeException("Something went wrong during a client connection establishing.");
         }
 
         doAuthentication();
-        listenMessages();
+
+            try {
+                listenMessages();
+            }catch (IOException e) {
+                server.removeClient(this);
+                try {
+                    socket.close();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
     }
 
     public String getName() {
@@ -33,9 +45,13 @@ public class ClientHandler {
 
     private void doAuthentication() {
         try {
+            socket.setSoTimeout(12000);
             performAuthentication();
+            socket.setSoTimeout(0);
+        }catch (SocketTimeoutException se){
+            throw new RuntimeException("Timeout - 120s for authentication complete!");
         } catch (IOException ex) {
-            throw new RuntimeException("Something went wring during a client authentication.");
+            throw new RuntimeException("Something went wrong during a client authentication.",ex);
         }
     }
 
@@ -79,15 +95,11 @@ public class ClientHandler {
         }
     }
 
-    public void readMessage() {
-        try {
+    public void readMessage() throws IOException {
             server.broadcastMessage(String.format("[%s]: %s", this.name,in.readUTF()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
-    public void listenMessages() {
+    public void listenMessages() throws IOException {
         while (true) {
             readMessage();
         }
