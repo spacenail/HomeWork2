@@ -18,7 +18,7 @@ public class ChatFrame {
     }
 
     private void init() {
-        mainFrame.setBounds(new Rectangle(500, 700));
+        mainFrame.setBounds(new Rectangle(400, 500));
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setTitle("Chat v1.0");
 

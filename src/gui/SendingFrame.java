@@ -14,6 +14,10 @@ public class SendingFrame {
     public SendingFrame(Consumer<String> onSubmit) {
         this.onSubmit = onSubmit;
         writingField = new JTextField();
+        writingField.addActionListener(e->{
+            onSubmit.accept(writingField.getText());
+            writingField.setText(null);
+        });
         submitBtn = new JButton("Send");
         submitBtn.addActionListener(e -> {
             onSubmit.accept(writingField.getText());
