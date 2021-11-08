@@ -56,6 +56,7 @@ public class ClientHandler {
                                         name = username;
                                         server.addClient(this);
                                         isSuccess.set(true);
+                                        sendMessage("Welcome to chat!");
                                     } else {
                                         sendMessage("Current username is already occupied.");
                                     }
@@ -80,7 +81,7 @@ public class ClientHandler {
 
     public void readMessage() {
         try {
-            server.broadcastMessage(in.readUTF());
+            server.broadcastMessage(String.format("[%s]: %s", this.name,in.readUTF()));
         } catch (IOException e) {
             e.printStackTrace();
         }
